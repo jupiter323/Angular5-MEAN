@@ -3,7 +3,12 @@ const jwt = require('express-jwt');
 const { validationResult } = require('express-validator/check');
 
 const Todo = require('../models/Todo');
-
+// Response handling
+let response = {
+  status: 200,
+  data: [],
+  message: null
+};
 // Error handling
 const sendError = (err, res) => {
   response.status = 501;
@@ -11,12 +16,7 @@ const sendError = (err, res) => {
   res.status(501).json(response);
 };
 
-// Response handling
-let response = {
-  status: 200,
-  data: [],
-  message: null
-};
+
 
 exports.createTodo = function (req, res) {
   let todo = new Todo({
